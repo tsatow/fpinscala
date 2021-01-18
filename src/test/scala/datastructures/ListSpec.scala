@@ -30,4 +30,20 @@ class ListSpec extends FlatSpec with Matchers {
     List.dropWhile(List(1, 2, 3))(_ < 4) shouldEqual List()
     List.dropWhile[Int](List())(_ < 1) shouldEqual List()
   }
+
+  "reverse" should "Listの並び順を反転させる" in {
+    List.reverse(List(1, 2, 3)) shouldEqual List(3, 2, 1)
+    List.reverse(List(1)) shouldEqual List(1)
+    List.reverse(Nil) shouldEqual Nil
+  }
+
+  "flatten" should "複数のリストからなるリストを1つにリストとして連結する" in {
+    List.flatten(List(List(1, 2, 3), List(4, 5, 6))) shouldEqual List(1, 2, 3, 4, 5, 6)
+    List.flatten(List(List(1))) shouldEqual List(1)
+    List.flatten(Nil) shouldEqual Nil
+  }
+
+  "flatMap" should "flatMapする" in {
+    List.flatMap(List(1, 2, 3))(i => List(i, i)) shouldEqual List(1, 1, 2, 2, 3, 3)
+  }
 }
