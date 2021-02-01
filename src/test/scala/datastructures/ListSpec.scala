@@ -46,4 +46,13 @@ class ListSpec extends FlatSpec with Matchers {
   "flatMap" should "flatMapする" in {
     List.flatMap(List(1, 2, 3))(i => List(i, i)) shouldEqual List(1, 1, 2, 2, 3, 3)
   }
+
+  "hasSubsequence" should "subsequenceかどうかを判定する" in {
+    List.hasSubsequence(List(1, 2, 3, 4), List(1, 2)) shouldEqual true
+    List.hasSubsequence(List(1, 2, 3, 4), List(2, 3)) shouldEqual true
+    List.hasSubsequence(List(1, 2, 3, 4), List(4)) shouldEqual true
+    List.hasSubsequence(List(1, 2, 3, 4), Nil) shouldEqual true
+    List.hasSubsequence(List(1, 2, 3, 4), List(3, 5)) shouldEqual false
+    List.hasSubsequence(List(1, 2, 3), List(1, 2, 3, 4)) shouldEqual false
+  }
 }

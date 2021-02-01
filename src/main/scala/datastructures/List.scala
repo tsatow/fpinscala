@@ -225,8 +225,28 @@ object List {
 
   /**
    * ex.3.24
+   * Nilはどんなリストに対してもsubsequenceとする
    */
+  @annotation.tailrec
   def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = {
-
+    if (startsWith(sup, sub)) {
+      true
+    } else {
+      sup match {
+        case Nil         => sub == Nil
+        case Cons(_, xs) => hasSubsequence(xs, sub)
+      }
+    }
+  }
+  @annotation.tailrec
+  def startsWith[A](sup: List[A], sub: List[A]): Boolean = (sup, sub) match {
+    case (_, Nil)                             => true
+    case (Cons(suph, supt), Cons(subh, subt)) =>
+      if (suph == subh) {
+        startsWith(supt, subt)
+      } else {
+        false
+      }
+    case (_, _)                               => false
   }
 }
